@@ -27,7 +27,7 @@ class Seebug():
         if self.token:
             try:
                 self.headers['Authorization'] = f'Token {self.token}'
-                resp = requests.get(f'{self.url}/user/poc_list', headers=self.headers)
+                resp = requests.get(f'{self.url}/user/poc_list', headers=self.headers, timeout=20)
                 if resp and resp.status_code == 200:
                     self.pocs = resp.json()
                     return True
@@ -63,7 +63,7 @@ class Seebug():
 
     def search_poc(self, keyword):
         try:
-            resp = requests.get(f'{self.url}/user/poc_list?q={keyword}', headers=self.headers)
+            resp = requests.get(f'{self.url}/user/poc_list?q={keyword}', headers=self.headers, timeout=20)
             if resp and resp.status_code == 200:
                 pocs = resp.json()
                 return pocs
@@ -75,7 +75,7 @@ class Seebug():
         try:
             if ssvid and ssvid.startswith('ssvid-'):
                 ssvid = ssvid.split('ssvid-')[-1]
-            resp = requests.get(f'{self.url}/user/poc_detail?id={ssvid}', headers=self.headers)
+            resp = requests.get(f'{self.url}/user/poc_detail?id={ssvid}', headers=self.headers, timeout=20)
             content = resp.json()
             if resp and resp.status_code == 200 and 'code' in content:
                 poc = content['code']
