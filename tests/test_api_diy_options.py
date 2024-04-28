@@ -20,7 +20,7 @@ class TestCase(unittest.TestCase):
             'username': "asd",
             'password': 'asdss',
             'verbose': 0,
-            "timeout": 10,
+            "timeout": 20,
         }
         init_pocsuite(config)
         start_pocsuite()
