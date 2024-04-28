@@ -16,12 +16,8 @@ class TestCase(unittest.TestCase):
         pass
 
     def verify_result(self):
-        httpd = PHTTPServer(bind_ip='0.0.0.0', bind_port=6666, requestHandler=BaseRequestHandler)
-        httpd.start()
-        url = '{}://{}:{}/'.format('http', get_host_ip(), 6666)
-
         config = {
-            'url': [url],
+            'url': ['http://httpbin.org/post'],
             'poc': [os.path.join(paths.POCSUITE_ROOT_PATH, "../tests/login_demo.py")],
             'username': "asd",
             'password': 'asdss',
