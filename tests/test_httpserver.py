@@ -78,10 +78,10 @@ class TestCase(unittest.TestCase):
             httpd = PHTTPServer(bind_ip='0.0.0.0', bind_port=6666, use_https=True,
                                 requestHandler=BaseRequestHandler)
             httpd.start()
-            url = '{}://{}:{}/'.format('https', get_host_ip(), 6666)
+            url = '{}://{}:{}/'.format('https', '127.0.0.1', 6666)
             requests.get(url, timeout=20)
         except requests.exceptions.SSLError:
-            url = '{}://{}:{}/'.format('https', get_host_ip(), 6666)
+            url = '{}://{}:{}/'.format('https', '127.0.0.1', 6666)
             resp = requests.get(url, verify=False, timeout=20)
             self.assertEqual(resp.status_code, 200)
         except Exception:
