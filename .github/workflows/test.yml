@@ -53,6 +53,7 @@ jobs:
       - name: Install dependencies & Test
         run: |
           pip install --upgrade pip
+          pip install --upgrade setuptools
           pip install --upgrade -r requirements.txt
           python setup.py install
           python test.py
