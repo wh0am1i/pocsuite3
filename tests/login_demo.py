@@ -38,11 +38,10 @@ class DemoPOC(POCBase):
         result = {}
         payload = "username={0}&password={1}".format(self.get_option("username"), self.get_option("password"))
         r = requests.post(self.url, data=payload)
-        print(r.text)
-        # if r.status_code == 200:
-        result['VerifyInfo'] = {}
-        result['VerifyInfo']['URL'] = self.url
-        result['VerifyInfo']['Postdata'] = payload
+        if r.status_code == 200:
+            result['VerifyInfo'] = {}
+            result['VerifyInfo']['URL'] = self.url
+            result['VerifyInfo']['Postdata'] = payload
 
         return self.parse_output(result)
 
