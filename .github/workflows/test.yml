@@ -5,8 +5,8 @@ jobs:
   test:
     strategy:
       matrix:
-        python-version: ['3.7', '3.10']
-        os: [ubuntu-latest, macos-12, windows-latest]
+        python-version: ['3.9', '3.12']
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     steps:
@@ -26,34 +26,7 @@ jobs:
     - name: Install dependencies & Test
       run: |
         pip install --upgrade pip
+        pip install --upgrade setuptools
         pip install --upgrade -r requirements.txt
         python setup.py install
         python test.py
-
-  mac-arm:
-    strategy:
-      matrix:
-        python-version: [ '3.9', '3.12' ]
-    runs-on: macos-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache for pip
-        uses: actions/cache@v4
-        id: cache-pip
-        with:
-          path: ~/.cache/pip
-          key: macos-latest-cache-pip
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies & Test
-        run: |
-          pip install --upgrade pip
-          pip install --upgrade setuptools
-          pip install --upgrade -r requirements.txt
-          python setup.py install
-          python test.py
