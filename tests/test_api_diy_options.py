@@ -4,8 +4,6 @@ from pocsuite3.api import init_pocsuite
 from pocsuite3.api import start_pocsuite
 from pocsuite3.api import get_results
 from pocsuite3.api import paths
-from pocsuite3.modules.httpserver import PHTTPServer, BaseRequestHandler
-from pocsuite3.lib.core.common import get_host_ip
 
 
 class TestCase(unittest.TestCase):
