@@ -25,7 +25,6 @@ class TestCase(unittest.TestCase):
         init_pocsuite(config)
         start_pocsuite()
         result = get_results().pop()
-        print(result)
         self.assertTrue(result.status == 'success')
 
     @unittest.skip(reason='significant latency')

@@ -79,10 +79,10 @@ class TestCase(unittest.TestCase):
                                 requestHandler=BaseRequestHandler)
             httpd.start()
             url = '{}://{}:{}/'.format('https', get_host_ip(), 6666)
-            requests.get(url, timeout=20)
+            requests.get(url)
         except requests.exceptions.SSLError:
             url = '{}://{}:{}/'.format('https', get_host_ip(), 6666)
-            resp = requests.get(url, verify=False, timeout=20)
+            resp = requests.get(url, verify=False)
             self.assertEqual(resp.status_code, 200)
         except Exception:
             assert False
