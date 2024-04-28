@@ -4,6 +4,8 @@ from pocsuite3.api import init_pocsuite
 from pocsuite3.api import start_pocsuite
 from pocsuite3.api import get_results
 from pocsuite3.api import paths
+from pocsuite3.modules.httpserver import PHTTPServer, BaseRequestHandler
+from pocsuite3.lib.core.common import get_host_ip
 
 
 class TestCase(unittest.TestCase):
@@ -14,13 +16,17 @@ class TestCase(unittest.TestCase):
         pass
 
     def verify_result(self):
+        httpd = PHTTPServer(bind_ip='0.0.0.0', bind_port=6666, requestHandler=BaseRequestHandler)
+        httpd.start()
+        url = '{}://{}:{}/'.format('http', get_host_ip(), 6666)
+
         config = {
-            'url': ['https://www.baidu.com/'],
+            'url': [url],
             'poc': [os.path.join(paths.POCSUITE_ROOT_PATH, "../tests/login_demo.py")],
             'username': "asd",
             'password': 'asdss',
             'verbose': 0,
-            "timeout": 20,
+            "timeout": 10,
         }
         init_pocsuite(config)
         start_pocsuite()
